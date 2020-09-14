@@ -1,0 +1,16 @@
+.container
+  .p-3
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = render 'devise/shared/error_messages', resource: resource
+
+      .form-group
+        = f.label :email
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
+
+      .form-group
+        = f.label :password
+        = f.password_field :password, autocomplete: 'new-password', class: 'form-control'
+
+      = f.submit 'Sign in', class: 'btn btn-primary'
+
+    = render 'devise/shared/links'

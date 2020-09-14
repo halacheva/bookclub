@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title Bookclub
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.sticky-top
+      = link_to 'Bookclub', root_path, class: 'navbar-brand'
+
+      ul.navbar-nav.mr-auto
+        - if user_signed_in?
+          li.nav-item class=('active' if current_page?(:authors))
+            = link_to 'Authors', authors_path, class: 'nav-link'
+          li.nav-item class=('active' if current_page?(:new_review))
+            = link_to 'Write a review', new_review_path, class: 'nav-link'
+
+      - if user_signed_in?
+        span.navbar-text.mr-3 = "Signed in as #{current_user.email}"
+
+        = link_to 'Sign out', destroy_user_session_path, class: 'btn my-2 my-sm-0 bg-light', method: :delete
+      - else
+        = link_to 'Sign in', new_user_session_path, class: 'btn my-2 my-sm-0 bg-light'
+
+    - if notice
+      .alert.alert-success = notice
+
+    - if alert
+      .alert.alert-warning = alert
+
+    = yield

@@ -1,0 +1,6 @@
+book:
+  id: 1
+  title: 'New book'
+  description: 'Details about new book'
+  author_id: 1
+  publish_year: 2000

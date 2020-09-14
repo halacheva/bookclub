@@ -1,0 +1,40 @@
+.container-sm
+  .p-3
+    = form_for @author, url: author_path(@author.id) do |f|
+      .form-group
+        = f.label :first_name
+        = f.text_field :first_name, class: 'form-control'
+
+      .form-group
+        = f.label :last_name
+        = f.text_field :last_name, class: 'form-control'
+
+      .form-group
+        = f.label :country
+        = f.text_field :country, class: 'form-control'
+
+      .form-group
+        = f.label :genre
+        = f.text_field :genre, class: 'form-control'
+
+      = f.submit 'Update', class: 'btn btn-primary'
+
+  .p-3
+    - if @author.books.any?
+      table.table.table-hover.m-1
+        div.thead-light
+          tr
+            td.col-1 Title
+            td.col-1 Publish Year
+            td.col-3 Description
+
+        div
+          - @author.books.each do |book|
+            tr
+              td = book.title
+              td
+                - if book.publish_year.present?
+                  = book.publish_year
+                - else
+                  = 'Unknown'
+              td = book.description

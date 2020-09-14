@@ -1,24 +1,48 @@
-# README
+# Bookclub
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple Bookclub app for learning purposes
 
-Things you may want to cover:
+## Prerequesites
 
-* Ruby version
+Before you start, make sure to have installed the required dependencies:
 
-* System dependencies
+* Ruby version = 2.6.3
+* PostgreSQL Server 12.3 up and running
 
-* Configuration
+## Setting up
 
-* Database creation
+* Clone the repo
+```
+git clone git@github.com:halacheva/bookclub.git
+cd bookclub
+```
 
-* Database initialization
+* Setup the database and populate sample data
 
-* How to run the test suite
+```
+bundle exec rake db:setup
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+For new PostgreSQL installations role "root" could be missing and should be manually created:
 
-* Deployment instructions
+```
+sudo -u postgres createuser root
+```
 
-* ...
+## Running the app
+```
+bundle exec rails s
+```
+
+## Running tests
+
+```
+bundle exec rspec
+```
+
+## Example login
+```
+Email: jane@example.com, Password: 1
+Email: john@example.com, Password: 1
+```
+

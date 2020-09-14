@@ -1,0 +1,22 @@
+.container-fluid
+  table.table.table-hover.m-1
+    div.thead-light
+      tr
+        td.col-2 First Name
+        td.col-2 Last Name
+        td.col-2 Contry
+        td.col-4 Genre
+        td.col-1 Books
+        td.col-1
+
+    div
+      - @authors.each do |author|
+        tr
+          td = author.first_name
+          td = author.last_name
+          td = author.country
+          td = author.genre
+          td = author.books.count
+          td
+            span.p-3 = link_to image_tag('view.svg'), author_path(author.id)
+            span.p-3 = link_to image_tag('edit.svg'), edit_author_path(author.id)

@@ -1,0 +1,41 @@
+.container-fluid
+  table.table.table-hover.m-1
+    div.thead-light
+      tr
+        td.col-1 Title
+        td.col-1 Author
+        td.col-1 Publish Year
+        td.col-3 Description
+        td.col-3 Reviews
+
+    div
+      - @books.each do |book|
+        tr
+          td = book.title
+          td
+            - if book.author.present?
+              - if user_signed_in?
+                = link_to "#{book.author&.first_name} #{book.author&.last_name}", authors_path(book.author.id)
+              - else
+                =  "#{book.author&.first_name} #{book.author&.last_name}"
+            - else
+              = 'Unknown'
+          td
+            - if book.publish_year.present?
+              = book.publish_year
+            - else
+              = 'Unknown'
+          td = book.description
+          td
+            ul.list-group
+              - book.reviews.each do |review|
+                li.list-group-item
+                  h4 = review.title
+                  h6
+                    - if review.user == current_user
+                      | You
+                    - else
+                      = review.user.email
+                    = " at #{review.created_at}"
+
+                  p = review.description

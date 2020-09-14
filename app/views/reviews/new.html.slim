@@ -1,0 +1,23 @@
+.container-sm
+  .p-3
+    - if @review.errors.any?
+      .alert.alert-danger
+        h5 Your review could not be saved!
+        ul
+          - @review.errors.full_messages.each do |message|
+            li = message
+
+    = form_for @review, url: reviews_path do |f|
+      .form-group
+        = f.label :title
+        = f.select :book_id, Book.all.map { |b| [b.title, b.id] }, {include_blank: true}, {class: 'custom-select'}
+
+      .form-group
+        = f.label :title
+        = f.text_field :title, class: 'form-control'
+
+      .form-group
+        = f.label :description
+        = f.text_area :description, class: 'form-control'
+
+      = f.submit 'Create', class: 'btn btn-primary'
